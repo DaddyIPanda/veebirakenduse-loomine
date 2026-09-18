@@ -9,15 +9,15 @@
   </head>
   <body>
     <header>
-        <strong>Welcome to your dashboard!</strong>
+        <strong>Welcome to my dashboard!</strong>
     </header>
     <footer>
         <ul>
             <li>
-                <a href="https://ois2.ut.ee/">OIS</a>
+                <a href="https://ois2.ut.ee/" target="_blank">OIS</a>
             </li>
             <li>
-                <a href="https://courses.cs.ut.ee/">Courses</a>
+                <a href="https://courses.cs.ut.ee/" target="_blank">Courses</a>
             </li>
         </ul>
     </footer>
@@ -38,6 +38,21 @@
     </section>
     <section>
         <h1>Courses</h1>
+        <form>
+            <label for="subcourse">Course Title:</label><br>
+                <input type="text" id="subcourse" name="subcourse"><br>
+            <label for="subsemester">Semester:</label><br>
+                <select id="subsemester" name="subsemester">
+                    <option value="autumn">autumn</option>
+                    <option value="spring">spring</option>
+                </select><br>
+            <strong>Attendance</strong><br>
+            <input type="radio" id="attendance_virtual" name="subattendance" value="virtual">
+                <label for="attendance_virtual">Virtual attendance</label><br>
+            <input type="radio" id="attendance_physical" name="subattendance" value="physical">
+                <label for="attendance_physical">Physical attendance</label><br>
+            <button type="submit">Submit</button>
+        </form>
         <table>
             <thead>
             <tr>
@@ -50,29 +65,35 @@
             <tbody>
             <tr>
                 <td>1</td>
-                <td>Agile software development</td>
-                <td>fall</td>
+                <td><a href="https://courses.cs.ut.ee/2026/ASD/autumn" target="_blank">Agile software development</a></td>
+                <td>autumn</td>
                 <td>82</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td> Systems modelling </td>
-                <td>fall</td>
+                <td><a href="https://courses.cs.ut.ee/2026/systemsmodelling/autumn" target="_blank">Systems modelling</a></td>
+                <td>autumn</td>
                 <td>85</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td> Requirements Engineering </td>
-                <td>fall</td>
+                <td><a href="https://courses.cs.ut.ee/2026/RE/autumn" target="_blank">Requirements Engineering</a></td>
+                <td>autumn</td>
                 <td>99</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td> Human Computer Interaction </td>
-                <td>fall</td>
+                <td><a href="https://courses.cs.ut.ee/2026/HCI/spring/Main/HomePage" target="_blank">Human Computer Interaction</a></td>
+                <td>autumn</td>
                 <td>65</td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3"><strong>Average</strong></td>
+                <td><strong>82.75</strong></td>
+            </tr>
+            </tfoot>
         </table>
     </section>
   </body>
