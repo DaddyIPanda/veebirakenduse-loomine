@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Add Post | PostIt
+        </title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="site-header">
+            <nav aria-label="Main navigation">
+                <a href="index.html">
+                    Home
+                </a>
+                <a href="addPost.html">
+                    Add Post
+                </a>
+            </nav>
+            <a class="profile" href="login.html" aria-label="Log in">
+                👤
+            </a>
+        </header>
+        <main class="form-layout">
+            <section class="form-card">
+                <h1>
+                    Add a post
+                </h1>
+                <!-- No backend is required: submitting opens the home page. Fields intentionally have no name, so their contents are not placed in the URL. -->
+                <form action="index.html" method="get">
+                    <div class="field">
+                        <label for="post-body">
+                            Post body
+                        </label>
+                        <textarea id="post-body" rows="5" placeholder="Write your message">
+                        </textarea>
+                    </div>
+                    <div class="field">
+                        <label for="post-file">
+                            Select file
+                        </label>
+                        <input id="post-file" type="file" accept="image/*">
+                    </div>
+                    <button type="submit">
+                        Create post
+                    </button>
+                </form>
+            </section>
+        </main>
+        <footer class="site-footer">
+            PostIt · WAD Homework 1
+        </footer>
+    </body>
+</html>
