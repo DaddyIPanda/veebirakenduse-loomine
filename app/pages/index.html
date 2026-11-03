@@ -6,8 +6,15 @@
         <title>
             Home | PostIt
         </title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet" href="../shared/styles/base.css">
+        <link rel="stylesheet" href="../shared/styles/headerfooter.css">
+        <link rel="stylesheet" href="../shared/styles/feed.css">
+        <link rel="stylesheet" href="../shared/styles/forms.css">
+        <link rel="stylesheet" href="../shared/styles/utilities.css">
+        <link rel="stylesheet" href="../shared/styles/responsive.css">
     </head>
+
     <body>
         <header class="site-header">
             <nav aria-label="Main navigation">
@@ -18,10 +25,24 @@
                     Add Post
                 </a>
             </nav>
-            <a class="profile" href="login.html" aria-label="Log in">
-                👤
-            </a>
+
+            <div class="profile-menu-container">
+                <a class="profile" href="#" id="profileBtn" aria-label="User menu">
+                    <span class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                </a>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <strong>Jaan Tamm</strong>
+                        <span>jaan.tamm@example.com</span>
+                    </div>
+                    <hr>
+                    <a href="login.html" class="logout-btn">Logout</a>
+                </div>
+            </div>
         </header>
+
         <main class="feed-layout">
             <aside class="side-panel" aria-label="Left decorative panel">
             </aside>
@@ -29,111 +50,17 @@
                 <h1 class="feed-title">
                     Latest posts
                 </h1>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 1
-                        </span>
-                    </header>
-                    <img class="post-image" src="assets/rand.jfif" alt="A riverside tower and buildings reflected in the water at dusk">
-                    <p>
-                        A quiet afternoon by the river.
-                    </p>
-                    <time datetime="2026-09-30">
-                        30 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            20
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 2
-                        </span>
-                    </header>
-                    <p>
-                        Does anyone know which room our lab is in today?
-                    </p>
-                    <time datetime="2026-09-29">
-                        29 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            0
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 3
-                        </span>
-                    </header>
-                    <img class="post-image" src="assets/cafe.jpg" alt="A yellow cafe building on a cobbled street">
-                    <p>
-                        Taking a break from studying to explore the city.
-                    </p>
-                    <time datetime="2026-09-28">
-                        28 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            12
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 4
-                        </span>
-                    </header>
-                    <p>
-                        Our first HTML and CSS project is coming together!
-                    </p>
-                    <time datetime="2026-09-27">
-                        27 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            5
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 5
-                        </span>
-                    </header>
-                    <p>
-                        A reminder: commit your changes before finishing for the day.
-                    </p>
-                    <time datetime="2026-09-26">
-                        26 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            1
-                        </span>
-                    </button>
-                </article>
+                <div class="posts-list"></div> 
             </section>
             <aside class="side-panel" aria-label="Right decorative panel">
             </aside>
         </main>
+        
         <footer class="site-footer">
-            PostIt · WAD Homework 1
+            SnatchPost
         </footer>
-        <script src="script.js">
-        </script>
+
+        <script type="module" src="../shared/scripts/loadPosts.js"></script>
+        <script src="../shared/scripts/dropdown.js"></script>
     </body>
 </html>

@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "author": "Jaan Tamm",
+    "avatar": "https://i.pravatar.cc/80?img=1",
+    "createdAt": "2025-03-11T10:15:00Z",
+    "text": "I went to a mall and bought a new laptop today!",
+    "image": null
+  },
+  {
+    "id": 2,
+    "author": "Anastasia Volkova",
+    "avatar": "https://i.pravatar.cc/80?img=5",
+    "createdAt": "2025-11-01T11:40:00Z",
+    "text": "Закат сегодня был огонь 🔥",
+    "image": "https://picsum.photos/id/1015/600/300"
+  },
+  {
+    "id": 3,
+    "author": "Mari Mets",
+    "avatar": "https://i.pravatar.cc/80?img=9",
+    "createdAt": "2024-05-02T08:05:00Z",
+    "text": "Kes teab, mis ruumis täna labor on?",
+    "image": null
+  },
+  {
+    "id": 4,
+    "author": "Dmitri Sokolov",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "createdAt": "2021-01-02T14:30:00Z",
+    "text": "Сделал первый HTML/CSS проект — работает!",
+    "image": null
+  },
+  {
+    "id": 5,
+    "author": "Kristjan Saar",
+    "avatar": "https://i.pravatar.cc/80?img=15",
+    "createdAt": "2026-03-03T09:12:00Z",
+    "text": "Kohv ja kood — parim duo ☕",
+    "image": "https://picsum.photos/id/225/600/300"
+  },
+  {
+    "id": 6,
+    "author": "Ekaterina Ivanova",
+    "avatar": "https://i.pravatar.cc/80?img=20",
+    "createdAt": "2022-07-03T18:45:00Z",
+    "text": "Напоминание: не забудьте закоммитить изменения перед уходом.",
+    "image": null
+  },
+  {
+    "id": 7,
+    "author": "Liis Kask",
+    "avatar": "https://i.pravatar.cc/80?img=25",
+    "createdAt": "2024-03-04T07:55:00Z",
+    "text": "Hommikune jalutuskäik enne loenguid.",
+    "image": "https://picsum.photos/id/1018/600/300"
+  },
+  {
+    "id": 8,
+    "author": "Alexei Petrov",
+    "avatar": "https://i.pravatar.cc/80?img=33",
+    "createdAt": "2024-03-04T12:20:00Z",
+    "text": "Разбираюсь с Fetch API — наконец-то данные грузятся динамически.",
+    "image": null
+  },
+  {
+    "id": 9,
+    "author": "Andres Sepp",
+    "avatar": "https://i.pravatar.cc/80?img=40",
+    "createdAt": "2024-03-05T09:20:00Z",
+    "text": "Leidsin suurepärase kohviku õppimiseks",
+    "image": "https://picsum.photos/id/431/600/300"
+  },
+  {
+    "id": 10,
+    "author": "Olga Smirnova",
+    "avatar": "https://i.pravatar.cc/80?img=45",
+    "createdAt": "2024-03-05T16:10:00Z",
+    "text": "Why are we so alone?",
+    "image": null
+  },
+  {
+    "id": 11,
+    "author": "Kertu Mägi",
+    "avatar": "https://i.pravatar.cc/80?img=48",
+    "createdAt": "2024-03-06T11:00:00Z",
+    "text": "Kontrollisin JSON-i jsonlint.com-is. See on kehtiv ✅",
+    "image": null
+  },
+  {
+    "id": 12,
+    "author": "Ivan Kuznetsov",
+    "avatar": "https://i.pravatar.cc/80?img=51",
+    "createdAt": "2024-03-06T19:35:00Z",
+    "text": "Hei flops!",
+    "image": null
+  }
+]

@@ -1,5 +1,9 @@
 // Counts are kept only for the current page visit.
-function likePost(button) {
+export function likePost(button) {
     const likes = button.querySelector("span");
-    likes.textContent = Number(likes.textContent) + 1;
+    if (likes) {
+        const currentCount = Number(likes.textContent);
+        const safeCount = isNaN(currentCount) ? 0 : currentCount;
+        likes.textContent = String(safeCount + 1);
+    }
 }
