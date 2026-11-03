@@ -40,3 +40,56 @@
 .site-footer {
     text-align: center;
 }
+
+.profile-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 12px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 220px;
+    z-index: 100;
+    padding: 16px;
+    text-align: left;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #252525;
+}
+
+.dropdown-header span {
+    font-size: 13px;
+    color: #666;
+}
+
+.dropdown-menu hr {
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+    margin: 12px 0;
+}
+
+.logout-btn {
+    display: block;
+    color: #d32f2f;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}

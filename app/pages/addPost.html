@@ -23,10 +23,22 @@
                     Add Post
                 </a>
             </nav>
-            <a class="profile" href="login.html" aria-label="Log in">
-                👤
-            </a>
+
+            <div class="profile-menu-container">
+                <a class="profile" href="#" id="profileBtn" aria-label="User menu">
+                    👤
+                </a>
+                <div class="dropdown-menu" id="profileDropdown">
+                    <div class="dropdown-header">
+                        <strong>Jaan Tamm</strong>
+                        <span>jaan.tamm@example.com</span>
+                    </div>
+                    <hr>
+                    <a href="login.html" class="logout-btn">Logout</a>
+                </div>
+            </div>
         </header>
+
         <main class="form-layout">
             <section class="form-card">
                 <h1>
@@ -56,5 +68,7 @@
         <footer class="site-footer">
             PostIt · WAD Homework 1
         </footer>
+
+        <script src="../shared/scripts/dropdown.js"></script>
     </body>
 </html>
