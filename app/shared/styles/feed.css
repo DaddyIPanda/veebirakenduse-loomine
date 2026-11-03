@@ -39,6 +39,11 @@
     font-size: 13px;
 }
 
+.post-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .post-image {
     display: block;
     width: 100%;

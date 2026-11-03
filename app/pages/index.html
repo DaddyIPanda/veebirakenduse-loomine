@@ -34,103 +34,6 @@
                 <h1 class="feed-title">
                     Latest posts
                 </h1>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 1
-                        </span>
-                    </header>
-                    <img class="post-image" src="../shared/assets/rand.jfif" alt="A riverside tower and buildings reflected in the water at dusk">
-                    <p>
-                        A quiet afternoon by the river.
-                    </p>
-                    <time datetime="2026-09-30">
-                        30 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            20
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 2
-                        </span>
-                    </header>
-                    <p>
-                        Does anyone know which room our lab is in today?
-                    </p>
-                    <time datetime="2026-09-29">
-                        29 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            0
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 3
-                        </span>
-                    </header>
-                    <img class="post-image" src="../shared/assets/cafe.jpg" alt="A yellow cafe building on a cobbled street">
-                    <p>
-                        Taking a break from studying to explore the city.
-                    </p>
-                    <time datetime="2026-09-28">
-                        28 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            12
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 4
-                        </span>
-                    </header>
-                    <p>
-                        Our first HTML and CSS project is coming together!
-                    </p>
-                    <time datetime="2026-09-27">
-                        27 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            5
-                        </span>
-                    </button>
-                </article>
-                <article class="post">
-                    <header class="post-header">
-                        <span aria-label="Author">
-                            👤 Student 5
-                        </span>
-                    </header>
-                    <p>
-                        A reminder: commit your changes before finishing for the day.
-                    </p>
-                    <time datetime="2026-09-26">
-                        26 September 2026
-                    </time>
-                    <button type="button" onclick="likePost(this)" class="like-icon" aria-label="Like this post">
-                        👍
-                        <span>
-                            1
-                        </span>
-                    </button>
-                </article>
             </section>
             <aside class="side-panel" aria-label="Right decorative panel">
             </aside>
@@ -138,7 +41,7 @@
         <footer class="site-footer">
             PostIt · WAD Homework 1
         </footer>
-        <script src="../shared/scripts/countLikes.js">
+        <script type="module" src="../shared/scripts/loadPosts.js">
         </script>
     </body>
 </html>

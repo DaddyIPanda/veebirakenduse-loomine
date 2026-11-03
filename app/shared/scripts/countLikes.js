@@ -1,5 +1,5 @@
 // Counts are kept only for the current page visit.
-function likePost(button) {
+export function likePost(button) {
     const likes = button.querySelector("span");
     if (likes) {
         const currentCount = Number(likes.textContent);
