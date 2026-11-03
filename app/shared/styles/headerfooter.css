@@ -32,13 +32,25 @@
     background: #e8e8e8;
 }
 
-.profile {
-    font-size: 28px;
-    text-decoration: none;
-}
-
 .site-footer {
     text-align: center;
+}
+
+.profile {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+}
+
+.profile:hover {
+    background: #e8e8e8;
+    border-radius: 50%;
+}
+
+.material-symbols-outlined {
+    font-size: 40px;
 }
 
 .profile-menu-container {
@@ -49,9 +61,9 @@
 .dropdown-menu {
     display: none;
     position: absolute;
-    right: 0;
+    right: -15px;
     top: 100%;
-    margin-top: 12px;
+    margin-top: 20px;
     background: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
