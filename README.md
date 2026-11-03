@@ -18,33 +18,32 @@ The project has evolved from a static website into a more interactive applicatio
 
 ```text
 SnatchPost/
-└── app/
-    ├── pages/
-    │   ├── index.html          # Home page (dynamic feed)
-    │   ├── addPost.html        # Add Post form
-    │   └── login.html          # Login form
-    │
-    └── shared/
-        ├── assets/             # Local images (if any)
+    ├── index.html          # Home page (dynamic feed)
+    ├── addPost.html        # Add Post form
+    └── login.html          # Login form
+    └── app/
         │
-        ├── config/
-        │   └── endpoints.js    # API and JSON endpoint configuration
-        │
-        ├── data/
-        │   └── posts.json      # Local JSON data
-        │
-        ├── scripts/
-        │   ├── loadPosts.js    # Fetching and rendering posts
-        │   ├── countLikes.js   # Like button functionality
-        │   └── dropdown.js     # Profile dropdown interactions
-        │
-        └── styles/
-            ├── base.css        # Reset and global typography
-            ├── headerfooter.css# Header, footer, and dropdown styles
-            ├── feed.css        # Post feed layout and cards
-            ├── forms.css       # Login and Add Post forms
-            ├── utilities.css   # Helper classes
-            └── responsive.css  # Responsive layouts and media queries
+        └── shared/
+            ├── assets/             # Local images (if any)
+            │
+            ├── config/
+            │   └── endpoints.js    # API and JSON endpoint configuration
+            │
+            ├── data/
+            │   └── posts.json      # Local JSON data
+            │
+            ├── scripts/
+            │   ├── loadPosts.js    # Fetching and rendering posts
+            │   ├── countLikes.js   # Like button functionality
+            │   └── dropdown.js     # Profile dropdown interactions
+            │
+            └── styles/
+                ├── base.css        # Reset and global typography
+                ├── headerfooter.css# Header, footer, and dropdown styles
+                ├── feed.css        # Post feed layout and cards
+                ├── forms.css       # Login and Add Post forms
+                ├── utilities.css   # Helper classes
+                └── responsive.css  # Responsive layouts and media queries
 ```
 
 ## Getting Started
