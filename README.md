@@ -10,7 +10,7 @@ Open `index.html` in a browser, or run the following command from the project fo
 python -m http.server 8000
 ```
 
-Then open http://localhost:8000. No additional packages or build step are required.
+Then open http://localhost:8000/app/pages. No additional packages or build step are required.
 
 ## Project structure
 
