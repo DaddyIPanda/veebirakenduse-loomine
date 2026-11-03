@@ -1,57 +1,79 @@
 import { ENDPOINTS } from '../config/endpoints.js';
 import { likePost } from './countLikes.js';
 
-async function loadPosts() {
-    const feed = document.querySelector('.feed');
-    if (!feed) {
-        console.error('Контейнер .feed не найден');
+// Fetches the array of posts from the server.
+async function fetchPosts() {
+    // Use local data to avoid CORS issues during development.
+    const response = await fetch(ENDPOINTS.postsLocal);
+    // const response = await fetch(ENDPOINTS.postsRemote);
+
+    // Check if the HTTP request was successful.
+    if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+    }
+    
+    return await response.json();
+}
+
+// Acts as the main entry point connecting data to the UI.
+async function initApp() {
+    const postsContainer = document.querySelector('.posts-list');
+    
+    // Always check if the target DOM element exists before using it.
+    if (!postsContainer) {
+        console.error('Container ".posts-list" was not found in the DOM.');
         return;
     }
 
-    feed.innerHTML = '<p>Загрузка постов...</p>';
+    postsContainer.innerHTML = '<p>Loading posts...</p>';
 
     try {
-        // ============================================================
-        // ЗАДАНИЕ 4: удалённый источник
-        // ============================================================
-        const response = await fetch(ENDPOINTS.postsRemote);
-
-        // ============================================================
-        // ЗАДАНИЕ 5: локальный источник
-        // Раскомментируйте строку ниже и закомментируйте fetch выше.
-        // ============================================================
-        //const response = await fetch(ENDPOINTS.postsLocal);
-
-        if (!response.ok) {
-            throw new Error(`HTTP ошибка: ${response.status}`);
+        const posts = await fetchPosts();
+        
+        // Ensure the API actually returned an array to prevent crashes.
+        if (!Array.isArray(posts)) {
+            throw new Error('Data format is invalid. Expected an array of posts.');
         }
 
-        const posts = await response.json();
-
-        feed.innerHTML = '';
-        renderPosts(posts, feed);
+        postsContainer.innerHTML = ''; 
+        renderPosts(posts, postsContainer);
+        
     } catch (error) {
-        console.error('Не удалось загрузить посты:', error);
-        feed.innerHTML = '<p style="color: red;">Ошибка загрузки постов.</p>';
+        console.error('Failed to load posts:', error);
+        postsContainer.innerHTML = '<p class="error-msg" style="color:red;">Error loading posts. Check console for details.</p>';
     }
 }
 
+// Sorts the posts and renders them into the container.
 function renderPosts(posts, container) {
-    // Новые сверху
-    const sorted = [...posts].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    );
+    // Sort posts by date in descending order (newest first).
+    const sortedPosts = [...posts].sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        
+        // Prevent broken dates from crashing the sort function.
+        const validA = isNaN(dateA) ? 0 : dateA;
+        const validB = isNaN(dateB) ? 0 : dateB;
 
-    for (const post of sorted) {
-        container.appendChild(createPostElement(post));
-    }
+        return validB - validA;
+    });
+
+    // Use DocumentFragment to batch DOM updates and prevent page reflows.
+    const fragment = document.createDocumentFragment();
+    
+    sortedPosts.forEach(post => {
+        fragment.appendChild(createPostCard(post));
+    });
+
+    container.appendChild(fragment);
 }
 
-function createPostElement(post) {
+// Creates the DOM element for a single post card.
+function createPostCard(post) {
     const article = document.createElement('article');
     article.className = 'post';
 
-    // --- Автор + аватар ---
+    // Build the post header (avatar and author name).
     const header = document.createElement('header');
     header.className = 'post-header';
 
@@ -59,59 +81,76 @@ function createPostElement(post) {
         const avatar = document.createElement('img');
         avatar.className = 'post-avatar';
         avatar.src = post.avatar;
-        avatar.alt = `Аватар ${post.author}`;
+        // Add a fallback name if the author field is missing.
+        avatar.alt = `${post.author || 'User'}'s avatar`; 
         avatar.width = 32;
         avatar.height = 32;
         header.appendChild(avatar);
     }
 
-    const author = document.createElement('span');
-    author.textContent = post.author;
-    header.appendChild(author);
+    const authorName = document.createElement('span');
+    authorName.textContent = post.author || 'Anonymous'; 
+    header.appendChild(authorName);
     article.appendChild(header);
 
-    // --- Картинка (если есть) ---
-    // В JSON только строка-URL (задание 6)
+    // Render the image only if the post contains an image URL.
     if (post.image) {
         const img = document.createElement('img');
         img.className = 'post-image';
         img.src = post.image;
-        img.alt = 'Изображение поста';
-        img.loading = 'lazy';
+        img.alt = `Image posted by ${post.author || 'user'}`; 
+        // Lazy loading improves performance for long pages.
+        img.loading = 'lazy'; 
         article.appendChild(img);
     }
 
-    // --- Текст ---
+    // Set the post text, providing a fallback if the text is missing.
     const text = document.createElement('p');
-    text.textContent = post.text;
+    text.textContent = post.text || 'No content provided.'; 
     article.appendChild(text);
 
-    // --- Дата ---
-    const time = document.createElement('time');
-    time.dateTime = post.createdAt;
-    time.textContent = formatDate(post.createdAt);
-    article.appendChild(time);
+    article.appendChild(createLikeButton());
 
-    // --- Лайк ---
-    const likeBtn = document.createElement('button');
-    likeBtn.type = 'button';
-    likeBtn.className = 'like-icon';
-    likeBtn.setAttribute('aria-label', 'Like this post');
-    likeBtn.innerHTML = '👍 <span>0</span>';
-    likeBtn.addEventListener('click', () => likePost(likeBtn));
-    article.appendChild(likeBtn);
+    // Set the post date and make it machine-readable for accessibility.
+    const time = document.createElement('time');
+    if (post.createdAt) {
+        time.dateTime = post.createdAt; 
+        time.textContent = formatDate(post.createdAt);
+    } else {
+        time.textContent = 'Unknown date';
+    }
+    article.appendChild(time);
 
     return article;
 }
 
+// Creates the "Like" button with its event listener.
+function createLikeButton() {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'like-icon';
+    button.setAttribute('aria-label', 'Like this post');
+    button.innerHTML = '👍 <span>0</span>';
+    
+    // This keeps HTML clean and separates logic from markup.
+    button.addEventListener('click', () => likePost(button));
+    
+    return button;
+}
+
+// Converts an ISO date string into a human-readable format.
 function formatDate(isoString) {
     const date = new Date(isoString);
-    if (isNaN(date)) return isoString;
-    return date.toLocaleDateString('ru-RU', {
+    
+    // Return the original string if the date is invalid.
+    if (isNaN(date.getTime())) return isoString;
+    
+    return date.toLocaleDateString('en-GB', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadPosts);
+// Initialize the application once the DOM is fully loaded.
+document.addEventListener('DOMContentLoaded', initApp);
