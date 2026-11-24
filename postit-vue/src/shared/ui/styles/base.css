@@ -1,0 +1,15 @@
+/* Sets the global box model, typography, and page colors. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    background: #1d6a96;
+}
+
+h1 {
+    font-size: 22px;
+}
