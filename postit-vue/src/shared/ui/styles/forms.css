@@ -1,3 +1,4 @@
+/* Provides shared layout and control styles for page forms. */
 .form-layout {
     display: flex;
     justify-content: center;

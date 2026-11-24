@@ -1,3 +1,4 @@
+/* Provides reusable utility styles for accessible presentation. */
 .visually-hidden {
     position: absolute;
     width: 1px;

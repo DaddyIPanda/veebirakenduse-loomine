@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Resets every post's like count and reports storage failures to the user.
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 

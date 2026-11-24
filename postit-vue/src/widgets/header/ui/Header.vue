@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Provides shared navigation links and the user menu on every route.
 import Dropdown from '../../../shared/ui/components/Dropdown.vue'
 import { ROUTES } from '../../../shared/config/routes'
 </script>

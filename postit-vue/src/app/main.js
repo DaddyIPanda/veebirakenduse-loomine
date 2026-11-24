@@ -1,3 +1,4 @@
+// Creates the Vue app and installs its global state, router, and shared styles.
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router.js'

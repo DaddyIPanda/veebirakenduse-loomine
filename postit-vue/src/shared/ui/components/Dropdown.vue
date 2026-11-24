@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Controls the profile menu and closes it when the user clicks outside.
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isOpen = ref(false)
@@ -9,7 +10,7 @@ function toggle() {
 }
 
 function handleDocClick(e: MouseEvent) {
-  // Если кликнули вне контейнера с меню — закрываем
+  // Close the menu when the click target is outside its container.
   if (containerRef.value && !containerRef.value.contains(e.target as Node)) {
     isOpen.value = false
   }
@@ -24,7 +25,7 @@ onBeforeUnmount(() => document.removeEventListener('click', handleDocClick))
     <a class="profile" href="#" id="profileBtn" aria-label="User menu" @click.prevent="toggle">
       <span class="material-symbols-outlined">account_circle</span>
     </a>
-    <!-- Обрати внимание на :class="{ show: isOpen }" -->
+    <!-- The show class controls whether the dropdown is visible. -->
     <div class="dropdown-menu" :class="{ show: isOpen }" id="profileDropdown">
       <div class="dropdown-header">
         <strong>Jaan Tamm</strong>

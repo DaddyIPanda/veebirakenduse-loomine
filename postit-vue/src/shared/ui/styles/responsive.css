@@ -1,3 +1,4 @@
+/* Adapts the shared page layouts for narrow screens. */
 @media (max-width: 600px) {
 
     /* Header and Footer */

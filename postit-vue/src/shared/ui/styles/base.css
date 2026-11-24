@@ -1,3 +1,4 @@
+/* Sets the global box model, typography, and page colors. */
 * {
     box-sizing: border-box;
 }

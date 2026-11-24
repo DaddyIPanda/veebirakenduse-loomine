@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Renders one post and reads or updates its like count through Vuex.
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 

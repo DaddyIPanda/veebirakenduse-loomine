@@ -1,4 +1,5 @@
 <script setup lang="js">
+// Loads the shared post feed once and exposes its state to the page.
 import ResetLikes from '../../../widgets/reset-likes/ui/ResetLikes.vue'
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
@@ -10,7 +11,7 @@ const loading = computed(() => store.state.loading)
 const error = computed(() => store.state.error)
 
 onMounted(() => {
-  // Загружаем посты только если их еще нет в хранилище
+  // Avoid refetching posts already held in the global store.
   if (store.state.posts.length === 0) {
     store.dispatch('fetchPosts')
   }

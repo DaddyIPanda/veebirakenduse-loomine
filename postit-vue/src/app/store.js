@@ -1,3 +1,4 @@
+// Centralizes post data and actions, including like counts persisted in browser storage.
 import { createStore } from 'vuex'
 import { ENDPOINTS } from '../shared/config/endpoints'
 
@@ -11,6 +12,7 @@ function readSavedLikeCounts() {
   try {
     parsedCounts = JSON.parse(savedCounts)
   } catch (error) {
+    // Ignore malformed stored data after reporting it so the feed can still load.
     console.error('Failed to parse saved like counts:', error)
     return {}
   }
@@ -49,6 +51,7 @@ export default createStore({
     SET_ERROR(state, e) { state.error = e },
     SET_POSTS(state, { posts, savedCounts }) {
       state.posts = posts.map((post) => {
+        // Prefer saved counts; otherwise use the value supplied with the post.
         const savedCount = savedCounts[post.id]
         const likes = Number.isFinite(savedCount) && savedCount >= 0
           ? savedCount
@@ -96,6 +99,7 @@ export default createStore({
       const post = state.posts.find((item) => item.id === postId)
       if (!post) throw new Error(`Post ${postId} was not found.`)
 
+      // Persist the next count before changing Vuex state so failed writes are visible.
       const updatedPosts = state.posts.map((item) => (
         item.id === postId ? { ...item, likes: item.likes + 1 } : item
       ))

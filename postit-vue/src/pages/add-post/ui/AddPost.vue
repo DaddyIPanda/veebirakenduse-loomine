@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Collects post text and an optional image, then adds the post through Vuex.
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
