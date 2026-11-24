@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script setup lang="js">
+import ResetLikes from '../../../widgets/reset-likes/ui/ResetLikes.vue'
 import { onMounted, computed } from 'vue'
 import { useStore } from 'vuex'
 import PostCard from '../../../shared/ui/components/PostCard.vue'
@@ -17,10 +18,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Остался только main, никаких header -->
   <main class="feed-layout">
-    <aside class="side-panel"></aside>
-    <section class="feed">
+    <aside class="side-panel" aria-label="Left decorative panel"></aside>
+    <section class="feed" aria-label="Posts">
       <h1 class="feed-title">Latest posts</h1>
       <div class="posts-list">
         <p v-if="loading">Loading posts...</p>
@@ -30,6 +30,7 @@ onMounted(() => {
         </template>
       </div>
     </section>
-    <aside class="side-panel"></aside>
+    <aside class="side-panel" aria-label="Right decorative panel"></aside>
   </main>
+  <ResetLikes />
 </template>

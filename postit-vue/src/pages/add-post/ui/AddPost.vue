@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import Dropdown from '../../../shared/ui/components/Dropdown.vue'
 
 const store = useStore()
 const router = useRouter()
@@ -21,14 +20,6 @@ async function onSubmit() {
 </script>
 
 <template>
-  <header class="site-header">
-    <nav aria-label="Main navigation">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/add">Add Post</RouterLink>
-    </nav>
-    <Dropdown />
-  </header>
-
   <main class="form-layout">
     <section class="form-card">
       <h1>Add a post</h1>

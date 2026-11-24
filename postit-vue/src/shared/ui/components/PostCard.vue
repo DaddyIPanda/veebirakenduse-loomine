@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const props = defineProps<{ post: any }>()
 const store = useStore()
 
 const likeCount = computed(() => store.getters.likeCount(props.post.id))
+const likeError = ref('')
 
-function onLike() {
-  store.dispatch('likePost', props.post.id)
+async function onLike() {
+  likeError.value = ''
+  try {
+    await store.dispatch('likePost', props.post.id)
+  } catch (error) {
+    console.error('Failed to save like:', error)
+    likeError.value = 'Could not save this like. Please try again.'
+  }
 }
 
 function formatDate(isoString: string) {
@@ -34,6 +41,7 @@ const dateText = computed(() => props.post.createdAt ? formatDate(props.post.cre
     <button type="button" class="like-icon" aria-label="Like this post" @click="onLike">
       👍 <span>{{ likeCount }}</span>
     </button>
+    <p v-if="likeError" role="alert">{{ likeError }}</p>
 
     <time v-if="post.createdAt" :datetime="post.createdAt">{{ dateText }}</time>
     <time v-else>{{ dateText }}</time>

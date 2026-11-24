@@ -3,7 +3,7 @@
     max-width: 1000px;
     margin: 16px auto;
     padding: 12px 18px;
-    background: #46b8a6;
+    background: #85b8cb;
     border-radius: 12px;
 }
 
@@ -21,7 +21,7 @@
 /* Descendant selector: all navigation links inside the header. */
 .site-header nav a {
     padding: 12px;
-    color: #222;
+    color: #000000;
     text-decoration: none;
     border-radius: 6px;
 }
@@ -29,7 +29,7 @@
 /* Pseudo-class: required hover background change. */
 .site-header nav a:hover,
 .site-header nav a:focus-visible {
-    background: #e8e8e8;
+    background: #D1DDDB;
 }
 
 .site-footer {
@@ -45,7 +45,7 @@
 }
 
 .profile:hover {
-    background: #e8e8e8;
+    background: #D1DDDB;
     border-radius: 50%;
 }
 
@@ -64,9 +64,9 @@
     right: -15px;
     top: 100%;
     margin-top: 20px;
-    background: white;
+    background: #D1DDDB;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-width: 220px;
     z-index: 100;
     padding: 16px;
@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    color: #252525;
+    color: #000000;
 }
 
 .dropdown-header span {

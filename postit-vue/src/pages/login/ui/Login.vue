@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Dropdown from '../../../shared/ui/components/Dropdown.vue'
 
 const router = useRouter()
 const email = ref('')
@@ -13,14 +12,6 @@ function onSubmit() {
 </script>
 
 <template>
-  <header class="site-header">
-    <nav aria-label="Main navigation">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/add">Add Post</RouterLink>
-    </nav>
-    <Dropdown />
-  </header>
-
   <main class="form-layout">
     <section class="form-card login-card">
       <h1>Welcome to SnatchPost</h1>
