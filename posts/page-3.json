@@ -1,0 +1,18 @@
+[
+  {
+    "id": 11,
+    "author": "Kertu Mägi",
+    "avatar": "https://i.pravatar.cc/80?img=48",
+    "createdAt": "2024-03-06T11:00:00Z",
+    "text": "Kontrollisin JSON-i jsonlint.com-is. See on kehtiv ✅",
+    "image": null
+  },
+  {
+    "id": 12,
+    "author": "Ivan Kuznetsov",
+    "avatar": "https://i.pravatar.cc/80?img=51",
+    "createdAt": "2024-03-06T19:35:00Z",
+    "text": "Hei flops!",
+    "image": null
+  }
+]
