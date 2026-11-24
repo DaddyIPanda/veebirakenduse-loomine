@@ -1,90 +1,110 @@
 # SnatchPost
 
-A responsive three-page web application developed using **HTML5, CSS3, and Vanilla JavaScript** for the Web Application Development course at the University of Tartu.
+SnatchPost is a responsive single-page feed application built with **Vue 3**, **Vue Router**, **Vuex**, and **Vite**.
 
-The project has evolved from a static website into a more interactive application featuring dynamic content rendering, modular JavaScript, an interactive profile dropdown, and JSON-based data fetching.
+This project was developed for the Web Application Development course at the University of Tartu.
 
 ## Features
 
-- **Dynamic Content Rendering** – Posts are fetched from a local JSON file and dynamically added to the DOM using the Fetch API and `DocumentFragment`.
-- **Modular JavaScript** – Application logic is separated into dedicated modules for post rendering, like functionality, and dropdown interactions.
-- **Interactive Profile Dropdown** – Displays user information and a logout link. The menu closes when clicking outside of it and includes smooth CSS animations.
-- **Like Buttons** – Clicking a like button increases the displayed count for the corresponding post.
-- **Image Handling** – Post images are loaded using URLs stored as strings in the JSON data. Image elements are created only when a valid URL is available.
-- **Material Symbols** – Google Material Symbols are used for the profile icon.
-- **Responsive Design** – Flexbox and CSS media queries adapt the layout to different screen sizes, including hiding side panels on mobile devices.
+- Loads posts from local JSON files in pages.
+- Automatically loads more posts while scrolling or through a load-more button.
+- Updates and persists like counts in the browser's `localStorage`.
+- Allows users to create a new post with text and a local image.
+- Includes login, signup, and add-post pages.
+- Closes the profile menu when clicking outside it.
+- Adapts to mobile and desktop screen sizes.
+
+## Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript
+- Vue 3
+- Vue Router
+- Vuex
+- Vite
+- JSON
 
 ## Project Structure
 
 ```text
-SnatchPost/
-    ├── index.html          # Home page (dynamic feed)
-    ├── addPost.html        # Add Post form
-    └── login.html          # Login form
-    └── app/
-        │
-        └── shared/
-            ├── assets/             # Local images (if any)
-            │
-            ├── config/
-            │   └── endpoints.js    # API and JSON endpoint configuration
-            │
-            ├── data/
-            │   └── posts.json      # Local JSON data
-            │
-            ├── scripts/
-            │   ├── loadPosts.js    # Fetching and rendering posts
-            │   ├── countLikes.js   # Like button functionality
-            │   └── dropdown.js     # Profile dropdown interactions
-            │
-            └── styles/
-                ├── base.css        # Reset and global typography
-                ├── headerfooter.css# Header, footer, and dropdown styles
-                ├── feed.css        # Post feed layout and cards
-                ├── forms.css       # Login and Add Post forms
-                ├── utilities.css   # Helper classes
-                └── responsive.css  # Responsive layouts and media queries
+.
+├── index.html
+├── package.json
+├── vite.config.js
+├── public/
+│   └── posts/
+│       ├── page-1.json
+│       ├── page-2.json
+│       └── page-3.json
+└── postit-vue/
+    └── src/
+        ├── app/              # App setup, router, and store
+        ├── pages/            # Home, add-post, login, and signup pages
+        ├── widgets/          # Header, footer, and reset-likes widget
+        └── shared/           # Components, styles, and shared configuration
 ```
 
-## Getting Started
+## Routes
 
-### Prerequisites
+| Route | Purpose |
+| --- | --- |
+| `/` | Post feed |
+| `/add-post` | Create a post |
+| `/login` | Log in |
+| `/signup` | Create an account |
 
-- Python 3
-- A modern web browser
+## Run Locally
 
-### Running Locally
+### Requirements
 
-Since the project uses **ES Modules** (`import` / `export`) and the **Fetch API**, opening `index.html` directly through the `file://` protocol will not work correctly because of browser security restrictions.
+- Node.js
+- npm
 
-A local development server is required.
+### Installation and development server
 
-1. Open a terminal in the project root directory.
+```bash
+npm install
+npm run dev
+```
 
-2. Start the Python HTTP server:
+Vite prints the local server address in the terminal. It is usually `http://localhost:5173/`.
 
-   ```bash
-   python -m http.server 8000
-   ```
+## Build
 
-3. Open the application in your browser:
+```bash
+npm run build
+```
 
-   [http://localhost:8000/app/pages/index.html](http://localhost:8000/app/pages/index.html)
+The production files are generated in the `dist/` directory.
 
-## Data Configuration
+Preview the production build:
 
-The application currently uses a local `posts.json` file to provide consistent data during development and testing.
+```bash
+npm run preview
+```
 
-The available endpoints are configured in:
+## Deploy to GitHub Pages
+
+The project uses `/veebirakenduse-loomine/` as its base path. To build and publish it, run:
+
+```bash
+npm run deploy
+```
+
+This command builds the application and publishes the contents of `dist/` to the `gh-pages` branch.
+
+## Post Data
+
+The first data page is loaded from `public/posts/page-1.json` when the Vuex store is created. Additional pages are loaded dynamically from `posts/page-N.json`.
+
+The page size and post data addresses are configured in:
 
 ```text
-app/shared/config/endpoints.js
+postit-vue/src/shared/config/endpoints.js
 ```
 
-To switch between local and remote data sources, update the endpoint used in `app/shared/scripts/loadPosts.js`:
-
-- `ENDPOINTS.postsLocal` – Local JSON file (default).
-- `ENDPOINTS.postsRemote` – Remote endpoint.
+Like counts are stored in the browser under the key `snatchpost-like-counts`.
 
 ## CSS Selectors
 
@@ -98,38 +118,6 @@ The project demonstrates the use of different CSS selector types:
 | Adjacent sibling | `.post-image + p`          | Selects a paragraph immediately following a post image.           |
 | General sibling  | `.post p ~ .like-icon`     | Selects a like icon preceded by a paragraph with the same parent. |
 
-## Manual Testing
+## Limitations
 
-The following checks can be performed to verify the application's functionality:
-
-- Navigate between all three pages using the navigation links.
-- Check hover effects on navigation links and the profile icon.
-- Open and close the profile dropdown by clicking the profile icon.
-- Verify that the dropdown closes when clicking outside of it.
-- Click like buttons and confirm that the displayed count increases.
-- Verify that posts are dynamically rendered on the home page.
-- Confirm that post images load correctly.
-- Test login form validation with empty fields and invalid email addresses.
-- Inspect the layout at desktop and mobile screen sizes using browser developer tools.
-- Confirm that side panels are hidden on mobile screens.
-- Validate all HTML files using the [W3C HTML Validator](https://validator.w3.org/).
-
-## Project Limitations
-
-SnatchPost is a **frontend-only application** developed for educational purposes.
-
-Although content rendering and user interactions are dynamic, the project does not include:
-
-- Real user authentication.
-- Actual image or file uploads.
-- Backend integration or database storage.
-- Persistent storage for likes or newly created posts.
-
-These features are outside the scope of the current assignment.
-
----
-
-**Technologies:** HTML5 · CSS3 · Vanilla JavaScript · JSON · Python HTTP Server
-
-**Course:** Web Application Development
-**University:** University of Tartu
+This is a frontend demo: login and signup do not provide real authentication, and posts are not sent to or stored in a database. Newly created posts remain available until the page is refreshed. Like counts are stored in `localStorage`.
