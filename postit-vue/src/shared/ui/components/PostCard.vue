@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+const props = defineProps<{ post: any }>()
+const store = useStore()
+
+const likeCount = computed(() => store.getters.likeCount(props.post.id))
+
+function onLike() {
+  store.dispatch('likePost', props.post.id)
+}
+
+function formatDate(isoString: string) {
+  const date = new Date(isoString)
+  if (isNaN(date.getTime())) return isoString
+  return date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+const dateText = computed(() => props.post.createdAt ? formatDate(props.post.createdAt) : 'Unknown date')
+</script>
+
+<template>
+  <article class="post">
+    <header class="post-header">
+      <img v-if="post.avatar" class="post-avatar" :src="post.avatar" :alt="`${post.author || 'User'}'s avatar`" width="32" height="32">
+      <span>{{ post.author || 'Anonymous' }}</span>
+    </header>
+
+    <img v-if="post.image" class="post-image" :src="post.image" :alt="`Image posted by ${post.author || 'user'}`" loading="lazy">
+
+    <p>{{ post.text || 'No content provided.' }}</p>
+
+    <button type="button" class="like-icon" aria-label="Like this post" @click="onLike">
+      👍 <span>{{ likeCount }}</span>
+    </button>
+
+    <time v-if="post.createdAt" :datetime="post.createdAt">{{ dateText }}</time>
+    <time v-else>{{ dateText }}</time>
+  </article>
+</template>
