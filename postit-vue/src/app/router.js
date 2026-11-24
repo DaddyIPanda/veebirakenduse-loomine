@@ -1,16 +1,12 @@
 // Maps application URLs to the page components rendered by the app shell.
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../pages/login/ui/Login.vue'
-import AddPost from '../pages/add-post/ui/AddPost.vue'
-import Home from '../pages/home/ui/Home.vue'
-import Signup from '../pages/singup/ui/Signup.vue'
 import { ROUTES } from '../shared/config/routes'
 
 const routes = [
-  { path: ROUTES.home, component: Home },
-  { path: ROUTES.add, component: AddPost },
-  { path: ROUTES.login, component: Login },
-  { path: ROUTES.signup, component: Signup },
+  { path: ROUTES.home, component: () => import('../pages/home/ui/Home.vue') },
+  { path: ROUTES.add, component: () => import('../pages/add-post/ui/AddPost.vue') },
+  { path: ROUTES.login, component: () => import('../pages/login/ui/Login.vue') },
+  { path: ROUTES.signup, component: () => import('../pages/singup/ui/Signup.vue') },
 ]
 
 export function createAppRouter() {

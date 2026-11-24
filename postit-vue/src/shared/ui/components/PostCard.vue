@@ -1,9 +1,14 @@
-<script setup lang="ts">
+<script setup>
 // Renders one post and reads or updates its like count through Vuex.
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
-const props = defineProps<{ post: any }>()
+const props = defineProps({
+  post: {
+    type: Object,
+    required: true
+  }
+})
 const store = useStore()
 
 const likeCount = computed(() => store.getters.likeCount(props.post.id))
@@ -19,7 +24,7 @@ async function onLike() {
   }
 }
 
-function formatDate(isoString: string) {
+function formatDate(isoString) {
   const date = new Date(isoString)
   if (isNaN(date.getTime())) return isoString
   return date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -31,11 +36,11 @@ const dateText = computed(() => props.post.createdAt ? formatDate(props.post.cre
 <template>
   <article class="post">
     <header class="post-header">
-      <img v-if="post.avatar" class="post-avatar" :src="post.avatar" :alt="`${post.author || 'User'}'s avatar`" width="32" height="32">
+      <img v-if="post.avatar" class="post-avatar" :src="post.avatar" :alt="`${post.author || 'User'}'s avatar`" width="32" height="32" loading="lazy" decoding="async">
       <span>{{ post.author || 'Anonymous' }}</span>
     </header>
 
-    <img v-if="post.image" class="post-image" :src="post.image" :alt="`Image posted by ${post.author || 'user'}`" loading="lazy">
+    <img v-if="post.image" class="post-image" :src="post.image" :alt="`Image posted by ${post.author || 'user'}`" loading="lazy" decoding="async">
 
     <p>{{ post.text || 'No content provided.' }}</p>
 

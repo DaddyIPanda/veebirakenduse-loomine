@@ -1,0 +1,42 @@
+[
+  {
+    "id": 6,
+    "author": "Ekaterina Ivanova",
+    "avatar": "https://i.pravatar.cc/80?img=20",
+    "createdAt": "2022-07-03T18:45:00Z",
+    "text": "Напоминание: не забудьте закоммитить изменения перед уходом.",
+    "image": null
+  },
+  {
+    "id": 7,
+    "author": "Liis Kask",
+    "avatar": "https://i.pravatar.cc/80?img=25",
+    "createdAt": "2024-03-04T07:55:00Z",
+    "text": "Hommikune jalutuskäik enne loenguid.",
+    "image": "https://picsum.photos/id/1018/600/300"
+  },
+  {
+    "id": 8,
+    "author": "Alexei Petrov",
+    "avatar": "https://i.pravatar.cc/80?img=33",
+    "createdAt": "2024-03-04T12:20:00Z",
+    "text": "Разбираюсь с Fetch API — наконец-то данные грузятся динамически.",
+    "image": null
+  },
+  {
+    "id": 9,
+    "author": "Andres Sepp",
+    "avatar": "https://i.pravatar.cc/80?img=40",
+    "createdAt": "2024-03-05T09:20:00Z",
+    "text": "Leidsin suurepärase kohviku õppimiseks",
+    "image": "https://picsum.photos/id/431/600/300"
+  },
+  {
+    "id": 10,
+    "author": "Olga Smirnova",
+    "avatar": "https://i.pravatar.cc/80?img=45",
+    "createdAt": "2024-03-05T16:10:00Z",
+    "text": "Why are we so alone?",
+    "image": null
+  }
+]

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 // Displays the shared site footer with an automatically updated copyright year.
 const currentYear = new Date().getFullYear()
 </script>

@@ -1,5 +1,4 @@
-
-<script setup lang="ts">
+<script setup>
 // Validates signup passwords and returns users to the home page on success.
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -19,19 +18,19 @@ const passwordErrors = computed(() => {
   if (value.length < 8 || value.length >= 15) {
     errors.push('At least 8 characters and fewer than 15 characters')
   }
-  if (!/[A-Z]/.test(value)) {
+  else if (!/[A-Z]/.test(value)) {
     errors.push('Includes at least one uppercase alphabet character')
   }
-  if ((value.match(/[a-z]/g) || []).length < 2) {
+  else if ((value.match(/[a-z]/g) || []).length < 2) {
     errors.push('Includes at least two lowercase alphabet characters')
   }
-  if (!/[0-9]/.test(value)) {
+  else if (!/[0-9]/.test(value)) {
     errors.push('Includes at least one numeric value')
   }
-  if (!/^[A-Z]/.test(value)) {
+  else if (!/^[A-Z]/.test(value)) {
     errors.push('Starts with an uppercase letter')
   }
-  if (!value.includes('_')) {
+  else if (!value.includes('_')) {
     errors.push('Includes the character "_"')
   }
 

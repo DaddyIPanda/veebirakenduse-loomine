@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 // Provides the demo login form and returns to the home page after submission.
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'

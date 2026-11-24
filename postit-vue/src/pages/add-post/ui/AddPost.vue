@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 // Collects post text and an optional image, then adds the post through Vuex.
 import { ref } from 'vue'
 import { useStore } from 'vuex'
@@ -7,10 +7,10 @@ import { useRouter } from 'vue-router'
 const store = useStore()
 const router = useRouter()
 const text = ref('')
-const file = ref<File | null>(null)
+const file = ref(null)
 
-function onFileChange(e: Event) {
-  const target = e.target as HTMLInputElement
+function onFileChange(e) {
+  const target = e.target
   file.value = target.files?.[0] || null
 }
 

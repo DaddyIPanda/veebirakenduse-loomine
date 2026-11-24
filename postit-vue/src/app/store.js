@@ -1,11 +1,19 @@
 // Centralizes post data and actions, including like counts persisted in browser storage.
 import { createStore } from 'vuex'
+import initialPosts from '../../../public/posts/page-1.json'
 import { ENDPOINTS } from '../shared/config/endpoints'
 
 const LIKE_COUNTS_STORAGE_KEY = 'snatchpost-like-counts'
 
 function readSavedLikeCounts() {
-  const savedCounts = window.localStorage.getItem(LIKE_COUNTS_STORAGE_KEY)
+  let savedCounts
+  try {
+    savedCounts = window.localStorage.getItem(LIKE_COUNTS_STORAGE_KEY)
+  } catch (error) {
+    console.error('Failed to read saved like counts:', error)
+    return {}
+  }
+
   if (!savedCounts) return {}
 
   let parsedCounts
@@ -25,16 +33,34 @@ function readSavedLikeCounts() {
   return {}
 }
 
-function persistLikeCounts(posts) {
-  const counts = Object.fromEntries(posts.map((post) => [post.id, post.likes]))
+function postsWithLikes(posts, savedCounts) {
+  return posts.map((post) => {
+    const savedCount = savedCounts[post.id]
+    const likes = Number.isFinite(savedCount) && savedCount >= 0
+      ? savedCount
+      : Number.isFinite(post.likes) && post.likes >= 0
+        ? post.likes
+        : 0
+
+    return { ...post, likes }
+  })
+}
+
+function persistLikeCounts(posts, preserveExisting = false) {
+  const counts = preserveExisting ? readSavedLikeCounts() : {}
+  posts.forEach((post) => {
+    counts[post.id] = post.likes
+  })
   window.localStorage.setItem(LIKE_COUNTS_STORAGE_KEY, JSON.stringify(counts))
 }
 
 export default createStore({
   state: {
-    posts: [],
+    posts: postsWithLikes(initialPosts, readSavedLikeCounts()),
     loading: false,
     error: null,
+    hasMorePosts: true,
+    nextPostsPage: 2,
   },
   getters: {
     sortedPosts(state) {
@@ -49,22 +75,11 @@ export default createStore({
   mutations: {
     SET_LOADING(state, v) { state.loading = v },
     SET_ERROR(state, e) { state.error = e },
-    SET_POSTS(state, { posts, savedCounts }) {
-      state.posts = posts.map((post) => {
-        // Prefer saved counts; otherwise use the value supplied with the post.
-        const savedCount = savedCounts[post.id]
-        const likes = Number.isFinite(savedCount) && savedCount >= 0
-          ? savedCount
-          : Number.isFinite(post.likes) && post.likes >= 0
-            ? post.likes
-            : 0
-
-        return {
-          ...post,
-          likes,
-        }
-      })
+    APPEND_POSTS(state, { posts, savedCounts }) {
+      state.posts.push(...postsWithLikes(posts, savedCounts))
     },
+    SET_NEXT_POSTS_PAGE(state, page) { state.nextPostsPage = page },
+    SET_HAS_MORE_POSTS(state, hasMore) { state.hasMorePosts = hasMore },
     ADD_POST(state, post) { state.posts.push(post) },
     INCREMENT_LIKE(state, postId) {
       const post = state.posts.find((item) => item.id === postId)
@@ -77,19 +92,24 @@ export default createStore({
     },
   },
   actions: {
-    async fetchPosts({ commit }) {
+    async fetchNextPosts({ commit, state }) {
+      if (state.loading || !state.hasMorePosts) return
+
       commit('SET_LOADING', true)
       commit('SET_ERROR', null)
       try {
-        const response = await fetch(ENDPOINTS.postsLocal)
+        const page = state.nextPostsPage
+        const response = await fetch(ENDPOINTS.postsPage(page))
         if (!response.ok) throw new Error(`HTTP Error: ${response.status}`)
         
         const posts = await response.json()
         if (!Array.isArray(posts)) throw new Error('Invalid data format')
         
-        commit('SET_POSTS', { posts, savedCounts: readSavedLikeCounts() })
+        commit('APPEND_POSTS', { posts, savedCounts: readSavedLikeCounts() })
+        commit('SET_NEXT_POSTS_PAGE', page + 1)
+        commit('SET_HAS_MORE_POSTS', posts.length === ENDPOINTS.postsPageSize)
       } catch (e) {
-        console.error('Failed to load posts:', e)
+        console.error('Failed to load more posts:', e)
         commit('SET_ERROR', e.message)
       } finally {
         commit('SET_LOADING', false)
@@ -103,7 +123,7 @@ export default createStore({
       const updatedPosts = state.posts.map((item) => (
         item.id === postId ? { ...item, likes: item.likes + 1 } : item
       ))
-      persistLikeCounts(updatedPosts)
+      persistLikeCounts(updatedPosts, true)
       commit('INCREMENT_LIKE', postId)
     },
     resetAllLikes({ commit, state }) {
@@ -120,7 +140,7 @@ export default createStore({
         })
       }
       const newPost = {
-        id: Math.max(0, ...state.posts.map((p) => p.id)) + 1,
+        id: Math.max(Date.now(), ...state.posts.map((p) => Number(p.id) || 0)) + 1,
         author: 'Jaan Tamm',
         avatar: 'https://i.pravatar.cc/80?img=1',
         createdAt: new Date().toISOString(),
