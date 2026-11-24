@@ -1,5 +1,5 @@
 // Maps application URLs to the page components rendered by the app shell.
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { ROUTES } from '../shared/config/routes'
 
 const routes = [
@@ -11,7 +11,7 @@ const routes = [
 
 export function createAppRouter() {
   return createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes,
   })
 }
